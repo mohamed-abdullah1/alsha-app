@@ -1,12 +1,13 @@
-import "./App.scss";
-import { AddJoke } from "./components";
-import ViewJoke from "./components/ViewJoke/ViewJoke";
-
+import { AddJoke, ViewJoke } from "./components";
+import { Routes, Route } from "react-router-dom";
+import styles from "./App.module.scss";
 function App() {
   return (
-    <div className="App">
-      <AddJoke />
-      <ViewJoke />
+    <div className={styles.app}>
+      <Routes>
+        <Route path="/" element={<ViewJoke />} />
+        <Route path="/add-joke" element={<AddJoke />} />
+      </Routes>
     </div>
   );
 }

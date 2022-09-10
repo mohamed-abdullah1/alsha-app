@@ -4,15 +4,18 @@ import "./index.scss";
 import App from "./App";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { BrowserRouter as Router } from "react-router-dom";
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
-    </QueryClientProvider>
+    <Router>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools position="bottom-right" initialIsOpen={false} />
+      </QueryClientProvider>
+    </Router>
   </React.StrictMode>
 );
 
