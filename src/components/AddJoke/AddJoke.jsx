@@ -1,64 +1,54 @@
 import { useRef } from "react";
-import Select from "react-select";
+import { BarLoader } from "react-spinners";
 import { useAddJoke } from "../../hooks/useAlshaData";
 import styles from "./AddJoke.module.scss";
-const AddJoke = () => {
+const AddJoke = ({ showHandler }) => {
   const contentRef = useRef(); //content
   const authorRef = useRef(); // author
-  const approvedRef = useRef(); // approved
-  const categoryIdRef = useRef(); // categoryId
-  const likesRef = useRef(); // likes
-  const dislikesRef = useRef(); // dislikes
 
-  const { mutate, isLoading, isError, error } = useAddJoke();
+  const { mutate, isLoading, isError, error } = useAddJoke({
+    onSuccess: () => showHandler(),
+  });
 
-  const approvedOptions = [
-    {
-      value: true,
-      label: "Approved",
-    },
-    { value: false, label: "not-Approved" },
-  ];
-  const categoriesOptions = [
-    {
-      value: 1,
-      label: "Job",
-    },
-    { value: 2, label: "Life" },
-  ];
   const submitHandler = (e) => {
     e.preventDefault();
     const joke = {
       content: contentRef.current.value,
       author: authorRef.current.value,
-      approved: approvedRef.current.getValue()[0].value,
-      categoryId: categoryIdRef.current.getValue()[0].value,
-      likes: likesRef.current.value,
-      dislikes: dislikesRef.current.value,
     };
     console.log(joke);
     mutate(joke);
   };
+  if (!isLoading && isError) {
+    return <form className={styles.form}> {error?.message}</form>;
+  }
   return (
     <div className={styles.container}>
       <form onSubmit={submitHandler} className={styles.form}>
-        <textarea
-          type="text"
-          placeholder="content"
-          rows="4"
-          cols="50"
-          //   maxLength="200"
-          ref={contentRef}
-        ></textarea>
-        <input type="text" placeholder="author" ref={authorRef} />
-        <Select options={approvedOptions} ref={approvedRef} />
-        <Select options={categoriesOptions} ref={categoryIdRef} />
-        <input type="number" placeholder="likes" ref={likesRef} />
-        <input type="number" placeholder="dislikes" ref={dislikesRef} />
-        <button type="submit">Add Joke</button>
+        {isLoading ? (
+          <BarLoader color="#ffa580" loading={isLoading} />
+        ) : (
+          <>
+            <textarea
+              type="text"
+              placeholder="النكته"
+              rows="4"
+              cols="1"
+              ref={contentRef}
+              required={true}
+            ></textarea>
+            <input
+              required={true}
+              type="text"
+              placeholder="صاحب النكتة"
+              ref={authorRef}
+            />
+            <button className={styles.btn} type="submit">
+              حطها
+            </button>
+          </>
+        )}
       </form>
-      {isLoading && <p>LOADING ...</p>}
-      {!isLoading && isError && <p>{error?.message}</p>}
     </div>
   );
 };

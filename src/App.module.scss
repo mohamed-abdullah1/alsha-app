@@ -10,6 +10,21 @@ $next-btn-shadow-clr: #95a4ff;
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
+    @media screen and (min-width: 900px) {
+        background-image: url("./assets//bg-wide.jpg");
+    }
+}
+@keyframes moving {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 .btn {
     background-color: $bg-shadow-clr;
@@ -30,4 +45,8 @@ $next-btn-shadow-clr: #95a4ff;
     &:active {
         transform: scale(1.1);
     }
+    @media screen and (min-width: 900px) {
+        margin: 2rem;
+    }
+    animation: moving 1s linear 3;
 }

@@ -4,7 +4,7 @@ import { useUpdateJoke, useViewJokes } from "../../hooks/useAlshaData";
 import { BarLoader } from "react-spinners";
 import styles from "./View.module.scss";
 
-const ViewJoke = () => {
+const ViewJoke = ({ showHandler }) => {
   const queryClient = useQueryClient();
   const [liked, setLiked] = useState(false);
   const [disliked, setDisLiked] = useState(false);
@@ -17,6 +17,8 @@ const ViewJoke = () => {
     select: (data) => {
       return data?.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     },
+    // refetchIntervalInBackground: false,
+    // refetchOnMount: true,
   });
   const { mutate } = useUpdateJoke({
     onSuccess: (res) => {
@@ -53,8 +55,11 @@ const ViewJoke = () => {
     }
   };
   const addHandler = () => {
-    console.log("Handle Adding");
+    showHandler();
   };
+  // const reviewHandler = () => {
+  //   setIndex(0);
+  // };
   //##################### END HANDLERS #######################
   const likingStyle = {
     "border-bottom": "solid 2px black",
@@ -74,6 +79,9 @@ const ViewJoke = () => {
           <button onClick={addHandler} className={styles.mainBtn}>
             زود انت
           </button>
+          {/* <button onClick={reviewHandler} className={styles.mainBtn}>
+            خد لفه تانى
+          </button> */}
         </div>
       </>
     );

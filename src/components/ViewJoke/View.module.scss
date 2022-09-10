@@ -19,6 +19,7 @@ $font-color: #2a293e;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    text-align: right;
 }
 
 .jokeContent {
@@ -41,6 +42,9 @@ $font-color: #2a293e;
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    @media screen and (min-width: 900px) {
+        width: 50%;
+    }
     button {
         cursor: pointer;
         display: flex;
@@ -77,6 +81,11 @@ $font-color: #2a293e;
     box-shadow: 5px 5px 1px $next-btn-shadow-clr, 5px 5px 1px 1px rgba(0, 0, 0, 1);
     font-family: "Almarai", sans-serif;
     font-size: 1.5rem;
+    font-weight: 100;
+    &:active {
+        transition: all 0.2s ease-in-out;
+        transform: translateY(0.4rem);
+    }
 }
 .alert {
     font-size: 2rem;

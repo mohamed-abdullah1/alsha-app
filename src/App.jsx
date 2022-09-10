@@ -23,16 +23,17 @@ function App() {
   const clickHandler = () => {
     setShow((prev) => !prev);
   };
+
   return (
     <div className={styles.app}>
-      <ViewJoke />
+      <ViewJoke showHandler={clickHandler} />
       <button onClick={clickHandler} className={styles.btn}>
         {show ? <AiOutlineClose /> : <GrFormAdd />}
       </button>
       {transition((style, item) =>
         item ? (
           <animated.div style={style}>
-            <AddJoke />
+            <AddJoke showHandler={clickHandler} />
           </animated.div>
         ) : (
           <></>
