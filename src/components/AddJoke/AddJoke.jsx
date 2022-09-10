@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Select from "react-select";
 import { useAddJoke } from "../../hooks/useAlshaData";
+import styles from "./AddJoke.module.scss";
 const AddJoke = () => {
   const contentRef = useRef(); //content
   const authorRef = useRef(); // author
@@ -39,8 +40,8 @@ const AddJoke = () => {
     mutate(joke);
   };
   return (
-    <>
-      <form onSubmit={submitHandler}>
+    <div className={styles.container}>
+      <form onSubmit={submitHandler} className={styles.form}>
         <textarea
           type="text"
           placeholder="content"
@@ -58,7 +59,7 @@ const AddJoke = () => {
       </form>
       {isLoading && <p>LOADING ...</p>}
       {!isLoading && isError && <p>{error?.message}</p>}
-    </>
+    </div>
   );
 };
 

@@ -68,12 +68,14 @@ const ViewJoke = () => {
   }
   if (jokes && jokes.length - 1 === index) {
     return (
-      <div className={styles.container}>
-        <p className={styles.alert}>😥النكت خلصت</p>
-        <button onClick={addHandler} className={styles.mainBtn}>
-          زود انت
-        </button>
-      </div>
+      <>
+        <div className={styles.container}>
+          <p className={styles.alert}>😥النكت خلصت</p>
+          <button onClick={addHandler} className={styles.mainBtn}>
+            زود انت
+          </button>
+        </div>
+      </>
     );
   }
   return (
